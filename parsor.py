@@ -4,6 +4,8 @@
     - put each line into a stack
     - popping the stack into new file
 
+2. Only adding the end of the section ine to the new file
+
 """
 
 
@@ -12,7 +14,8 @@ def read_file_backwards(file_path):
 
     with open(file_path, 'r', encoding='utf-8', errors='ignore') as file:
         for line in reversed(file.readlines()):
-            stack.append(line)
+            if line.strip().startswith("END_") or " END_" in line:
+                stack.append(line) 
 
     with open('secret/new_file.txt', 'w', encoding='utf-8') as new_file:
         while stack:
